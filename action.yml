@@ -1,0 +1,22 @@
+name: 'Precompute ROS Reference'
+description: 'Precompute a reference of all ROS2 packages in a given project and of the nodes, launch files and interfaces they provide.'
+inputs:
+  src-path:
+    description: 'The source directory'
+    required: false
+    default: '/workspace/src'
+  doc-path:
+    description: 'Where to store the precomputed documentation'
+    required: false
+    default: '/workspace/src/tmp/precomputed_docs'
+  graph-style:
+    description: 'Configuration of the graph style'
+    required: false
+    default: '/workspace/src/docs/source/ros2-graph_style.yaml'
+
+runs:
+  main: 'entrypoint.sh'
+  args:
+    - ${{ inputs.src-path }}
+    - ${{ inputs.doc-path }}
+    - ${{ inputs.graph-style }}
