@@ -15,8 +15,17 @@ inputs:
     default: '/workspace/src/docs/source/ros2-graph_style.yaml'
 
 runs:
-  main: 'entrypoint.sh'
-  args:
-    - ${{ inputs.src-path }}
-    - ${{ inputs.doc-path }}
-    - ${{ inputs.graph-style }}
+  using: 'composite'
+  steps:
+    - name: Inspect environment
+      run: echo ${{ github.workspace }} && echo ${{ github.action_path }}
+      shell: bash
+    - name: Inspect environment 2
+      run: ls -a ${{ github.workspace }} && ls -a ${{ github.action_path }}
+      shell: bash
+  # using: 'docker'
+  # image: 'Dockerfile'
+  # args:
+  #   - ${{ inputs.src-path }}
+  #   - ${{ inputs.doc-path }}
+  #   - ${{ inputs.graph-style }}
