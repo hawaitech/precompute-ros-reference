@@ -17,12 +17,21 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Inspect environment
-      run: echo ${{ github.workspace }} && echo ${{ github.action_path }}
+    - name: Copy ROS packages introspection tool
+      run: sudo cp -r ${{ github.action_path }}/ext/. $SRC_PATH/tmp/precompute-ros-reference
       shell: bash
-    - name: Inspect environment 2
-      run: ls -a ${{ github.workspace }} && ls -a ${{ github.action_path }}
+      env:
+        SRC_PATH: ${{ inputs.src-path }}
+    - run : ls $SRC_PATH/tmp/precompute-ros-reference
       shell: bash
+      env:
+        SRC_PATH: ${{ inputs.src-path }}
+    - name: Run ROS packages introspection tool
+      run: $SRC_PATH/tmp/precompute-ros-reference/run.sh $SRC_PATH $SRC_PATH/tmp/precomputed_docs $GRAPH_STYLE
+      shell: bash
+      env:
+        SRC_PATH: ${{ inputs.src-path }}
+        GRAPH_STYLE: ${{ inputs.graph-style }}
   # using: 'docker'
   # image: 'Dockerfile'
   # args:

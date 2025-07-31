@@ -1,19 +1,15 @@
 #!/bin/bash
 
-echo "TOTOTOTOTOTOTO !!!!"
+DEST=$1
 
-SRC_PATH=$1
-DOC_PATH=$2
-GRAPH_STYLE=$3
+echo Preparing copy to $DEST/tmp/precompute-ros-reference.
+echo Directory contains :
+ls $DEST/tmp/precompute-ros-reference
 
-mkdir -p /tmp/docs/.venv
-python3 -m venv /tmp/docs/.venv --system-site-packages
-/tmp/docs/.venv/bin/python3 -m pip install ros2-graph
-source /opt/ros/jazzy/setup.bash
-source /workspace/install/setup.bash
-source /tmp/docs/.venv/bin/activate
-python3 /ext/src/analyze_ros_packages.py \
-    --src-path $SRC_PATH \
-    --doc-path $DOC_PATH \
-    --graph-style $GRAPH_STYLE \
-    /
+rm -rf $DEST/tmp/precompute-ros-reference
+mkdir -p $DEST/tmp/precompute-ros-reference
+cp -r /ext/. $DEST/tmp/precompute-ros-reference
+
+echo Finished copy to $DEST/tmp/precompute-ros-reference.
+echo Directory contains :
+ls $DEST/tmp/precompute-ros-reference
