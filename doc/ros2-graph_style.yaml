@@ -1,0 +1,34 @@
+shapes:
+  main: ["[", "]"]
+  node: ["[", "]"]
+  topic: ["([", "])"]
+  service: ["[/", "\\]"]
+  action: ["{{", "}}"]
+colors:
+  main: "opacity:0.9,fill:#059,stroke:#09F,stroke-width:4px,color:#fff,font-size:16pt"
+  node: "opacity:0.9,fill:#2A0,stroke:#391,stroke-width:4px,color:#fff,font-size:10pt"
+  topic: "opacity:0.9,fill:#852,stroke:#CCC,stroke-width:2px,color:#fff,font-size:10pt"
+  service: "opacity:0.9,fill:#3B8062,stroke:#3B6062,stroke-width:2px,color:#fff,font-size:10pt"
+  action: "opacity:0.9,fill:#66A,stroke:#225,stroke-width:2px,color:#fff,font-size:10pt"
+  no_conected: "opacity:0.9,stroke-width:2px,color:#fff,font-size:10pt"
+links_display:
+  topics_publisher: "-->"
+  topics_subscriber: "-->"
+  services_server: "o-.-o"
+  services_client: "<-.->"
+  action_server: "o==o"
+  action_client: "<==>"
+links_style:
+  # topics_publisher:
+  # topics_subscriber:
+  # services_server:
+  # services_client:
+  action_server: fill:none,stroke:green;
+  action_client: fill:none,stroke:green;
+display_keys: False
+ignore:
+  nodes:
+    - "/Graph_generator"
+  # topics:
+  services: [".*get_type_description.*"]
+  # actions:

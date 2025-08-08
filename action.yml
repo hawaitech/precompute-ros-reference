@@ -1,0 +1,26 @@
+name: 'Precompute ROS Reference'
+description: 'Precompute a reference of all ROS2 packages in a given project and of the nodes, launch files and interfaces they provide.'
+inputs:
+  src-path:
+    description: 'The source directory'
+    required: false
+    default: '/workspace/src'
+  graph-style:
+    description: 'Configuration of the graph style'
+    required: false
+    default: '/workspace/src/docs/source/ros2-graph_style.yaml'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Copy ROS packages introspection tool
+      run: sudo cp -r ${{ github.action_path }}/ext/. $SRC_PATH/tmp/precompute-ros-reference
+      shell: bash
+      env:
+        SRC_PATH: ${{ inputs.src-path }}
+    - name: Run ROS packages introspection tool
+      run: $SRC_PATH/tmp/precompute-ros-reference/run.sh $SRC_PATH $SRC_PATH/tmp/precomputed_docs $GRAPH_STYLE
+      shell: bash
+      env:
+        SRC_PATH: ${{ inputs.src-path }}
+        GRAPH_STYLE: ${{ inputs.graph-style }}
